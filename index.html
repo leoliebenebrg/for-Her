@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Jess ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fce4ec; /* Light pink bg */
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+
+        /* --- Envelope Styles --- */
+        #envelope-container {
+            cursor: pointer;
+            text-align: center;
+        }
+        .envelope {
+            width: 150px;
+            height: 100px;
+            background: #ff5252;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 40px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+        .envelope:hover { transform: scale(1.1); }
+        .click-text { margin-top: 15px; color: #d32f2f; font-weight: bold; }
+
+        /* --- Card Styles (Hidden initially) --- */
+        #card-container {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            text-align: center;
+            max-width: 350px;
+            animation: popIn 0.5s ease;
+        }
+        
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Crops image nicely */
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        h1 { color: #c62828; margin: 0; font-family: 'Georgia', serif; }
+        p { color: #555; line-height: 1.5; }
+
+        .btn-group {
+            margin-top: 30px;
+            position: relative;
+            height: 50px; /* Space for buttons */
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        #yes-btn {
+            background-color: #e91e63;
+            color: white;
+            margin-right: 10px;
+        }
+        
+        #no-btn {
+            background-color: #ddd;
+            color: #333;
+            position: absolute; /* Allows moving freely */
+        }
+
+        /* Success Message */
+        #success-msg {
+            display: none;
+            color: #e91e63;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-container" onclick="openCard()">
+        <div class="envelope">💌</div>
+        <div class="click-text">Click to open</div>
+    </div>
+
+    <div id="card-container">
+        <img src="ons.jpeg" alt="Us"> 
+        
+        <h1>My Liefste...</h1>
+        <p>Lewe is soveel beter met jou by my sy. Ek is super lief vir jou.</p>
+        <h3>Sal jy my valentine wees?</h3>
+
+        <div class="btn-group">
+            <button id="ja-btn" onclick="acceptLove()">Ja, vir aaltyd!</button>
+            <button id="nee-btn" onmouseover="moveButton()">Nee</button>
+        </div>
+
+        <div id="success-msg">Beste keuse ooit! ❤️</div>
+    </div>
+
+    <script>
+        function openCard() {
+            document.getElementById('envelope-container').style.display = 'none';
+            document.getElementById('card-container').style.display = 'block';
+        }
+
+        function moveButton() {
+            const noBtn = document.getElementById('no-btn');
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.position = 'fixed'; // Break out of container
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+
+        function acceptLove() {
+            // Hide buttons
+            document.querySelector('.btn-group').style.display = 'none';
+            // Show success message
+            document.getElementById('success-msg').style.display = 'block';
+            
+            // Trigger Confetti
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#ff0000', '#ffa500', '#ffffff']
+            });
+        }
+    </script>
+</body>
+</html>
